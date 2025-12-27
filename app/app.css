@@ -1,0 +1,255 @@
+@import "tailwindcss";
+@plugin "daisyui"{
+   themes: light --default;
+};
+
+@plugin "daisyui/theme" {
+  name: "winter";
+  default: true;
+  prefersdark: false;
+  color-scheme: "light";
+  --color-base-100: oklch(100% 0 0);
+  --color-base-200: oklch(97.466% 0.011 259.822);
+  --color-base-300: oklch(93.268% 0.016 262.751);
+  --color-base-content: oklch(41.886% 0.053 255.824);
+  --color-primary: oklch(56.86% 0.255 257.57);
+  --color-primary-content: oklch(91.372% 0.051 257.57);
+  --color-secondary: oklch(42.551% 0.161 282.339);
+  --color-secondary-content: oklch(88.51% 0.032 282.339);
+  --color-accent: oklch(59.939% 0.191 335.171);
+  --color-accent-content: oklch(11.988% 0.038 335.171);
+  --color-neutral: oklch(19.616% 0.063 257.651);
+  --color-neutral-content: oklch(83.923% 0.012 257.651);
+  --color-info: oklch(88.127% 0.085 214.515);
+  --color-info-content: oklch(17.625% 0.017 214.515);
+  --color-success: oklch(80.494% 0.077 197.823);
+  --color-success-content: oklch(16.098% 0.015 197.823);
+  --color-warning: oklch(89.172% 0.045 71.47);
+  --color-warning-content: oklch(17.834% 0.009 71.47);
+  --color-error: oklch(73.092% 0.11 20.076);
+  --color-error-content: oklch(14.618% 0.022 20.076);
+  --radius-selector: 1rem;
+  --radius-field: 0.5rem;
+  --radius-box: 1rem;
+  --size-selector: 0.25rem;
+  --size-field: 0.25rem;
+  --border: 1px;
+  --depth: 0;
+  --noise: 0;
+}
+
+/* @plugin "daisyui/theme" {
+  name: "dracula";
+  default: false;
+  prefersdark: true;
+  color-scheme: "dark";
+  --color-base-100: oklch(28.822% 0.022 277.508);
+  --color-base-200: oklch(26.805% 0.02 277.508);
+  --color-base-300: oklch(24.787% 0.019 277.508);
+  --color-base-content: oklch(97.747% 0.007 106.545);
+  --color-primary: oklch(75.461% 0.183 346.812);
+  --color-primary-content: oklch(15.092% 0.036 346.812);
+  --color-secondary: oklch(74.202% 0.148 301.883);
+  --color-secondary-content: oklch(14.84% 0.029 301.883);
+  --color-accent: oklch(83.392% 0.124 66.558);
+  --color-accent-content: oklch(16.678% 0.024 66.558);
+  --color-neutral: oklch(39.445% 0.032 275.524);
+  --color-neutral-content: oklch(87.889% 0.006 275.524);
+  --color-info: oklch(88.263% 0.093 212.846);
+  --color-info-content: oklch(17.652% 0.018 212.846);
+  --color-success: oklch(87.099% 0.219 148.024);
+  --color-success-content: oklch(17.419% 0.043 148.024);
+  --color-warning: oklch(95.533% 0.134 112.757);
+  --color-warning-content: oklch(19.106% 0.026 112.757);
+  --color-error: oklch(68.22% 0.206 24.43);
+  --color-error-content: oklch(13.644% 0.041 24.43);
+  --radius-selector: 1rem;
+  --radius-field: 0.5rem;
+  --radius-box: 1rem;
+  --size-selector: 0.25rem;
+  --size-field: 0.25rem;
+  --border: 1px;
+  --depth: 0;
+  --noise: 0;
+} */
+
+* {
+  scrollbar-color: var(--color-base-300) var(--color-base-100);  
+  scrollbar-gutter: stable;
+  scrollbar-width: thin;
+}
+
+.drawer-side:hover::-webkit-scrollbar-thumb {
+  background-color: var(--color-base-content);
+}
+
+.menu-spinner,
+.menu-pending .menu-icon {
+  display: none;
+}
+.menu-pending .menu-spinner {
+  display: inherit;
+}
+
+/* --- Headings --- */
+.prose h1,
+.prose h2,
+.prose h3,
+.prose h4,
+.prose h5,
+.prose h6 {
+  @apply scroll-mt-20 font-bold text-base-content;
+}
+
+.prose h1 { 
+  @apply text-4xl w-full sticky top-0 bg-base-100 z-9 px-5 py-4; 
+}
+.prose h2 { 
+  @apply text-3xl mt-6 mb-3 pb-2; 
+}
+.prose h3 { 
+  @apply text-2xl mt-5;
+}
+.prose h4 { 
+  @apply text-lg mt-4 mb-2;
+}
+.prose h5 { 
+  @apply mt-3 mb-1;
+}
+
+/* --- Paragraphs & Links --- */
+.prose p {
+  @apply text-base-content my-4 leading-7;
+}
+
+.prose span.source {
+  @apply text-base-content text-xs;
+}
+
+.prose a:not(.np) {
+  @apply link link-primary no-underline hover:underline;
+}
+
+/* --- Lists --- */
+.prose ul,
+.prose ol { @apply my-4 pl-6 space-y-1; }
+.prose ul { @apply list-disc; }
+.prose ol { @apply list-decimal; }
+.prose li { @apply leading-7; }
+
+.prose > ul,
+.prose > ol {
+  @apply pl-6;
+  position: relative;
+  padding-left: 4rem;
+}
+
+/* Indent nested lists correctly */
+.prose ul ul,
+.prose ul ol,
+.prose ol ol,
+.prose ol ul {
+  @apply mt-1 ml-6;
+}
+
+/* --- Tables --- */
+.prose table {
+  @apply table table-zebra w-full text-base;
+}
+.prose th {
+  @apply font-semibold bg-base-200;
+}
+.prose td,
+.prose th {
+  @apply px-4 py-2;
+}
+
+/* --- Blockquote --- */
+.prose blockquote {
+  @apply border-l-4 border-primary/40 pl-3 italic bg-base-200 py-0.5 rounded-r-md mt-1 text-base-content w-[97%];
+}
+
+/* --- Code blocks & inline code --- */
+.prose pre {
+  @apply rounded-lg bg-transparent overflow-x-auto p-0 mt-0;
+}
+.prose pre code {
+  @apply bg-transparent p-0 m-0 text-sm;
+}
+.prose code {
+  @apply bg-base-200 px-1.5 py-0.5 rounded-md text-sm font-medium;
+}
+
+/* --- HR --- */
+.prose hr {
+  @apply border-base-300 mt-4 mb-6;
+}
+
+/* --- Images --- */
+.prose img:not(.stackblitz-img) {
+  @apply rounded-xl my-6 shadow-sm;
+}
+
+/* --- Indentation layout for nice anchor reveal --- */
+.prose > h2,
+.prose > h3,
+.prose > h4,
+.prose > h5,
+.prose > h6,
+.prose > p,
+.prose > span.source {
+  position: relative;
+  padding-left: 28px;
+  padding-right: 28px;
+}
+
+.prose > blockquote,
+.prose > hr {
+  margin-left: 28px;
+}
+
+/* --- Heading anchor link icons --- */
+h1 .heading-link,
+h2 .heading-link,
+h3 .heading-link,
+h4 .heading-link,
+h5 .heading-link,
+h6 .heading-link {
+  display: none;
+  position: absolute;
+  margin-left: -20px;
+  color:var(--color-base-content)
+  
+}
+
+h1:hover .heading-link,
+h2:hover .heading-link,
+h3:hover .heading-link,
+h4:hover .heading-link,
+h5:hover .heading-link,
+h6:hover .heading-link {
+  display: inline;
+  text-decoration:none;
+}
+
+/* --- Table of Contents Styling --- */
+.menu {
+  @apply bg-base-200 rounded-lg p-4;
+}
+
+.menu li {
+  @apply mb-1;
+}
+
+.menu li > a {
+  @apply px-2 py-1 rounded hover:bg-base-300;
+}
+
+.menu ul {
+  @apply ml-4 mt-1 border-base-300 pl-3;
+}
+
+.menu ul li > a {
+  @apply text-sm;
+}
+
