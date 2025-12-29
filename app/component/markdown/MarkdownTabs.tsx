@@ -1,12 +1,11 @@
 import { getExampleFile } from "@/lib/doc";
-import React, { useState, Children, isValidElement, type ReactNode, type ReactElement, useMemo, useEffect, createContext, useContext } from "react";
+import { decode } from "html-entities";
+import React, { Children, createContext, isValidElement, type ReactElement, type ReactNode, useContext, useEffect, useMemo, useState } from "react";
+import ReactDOMServer from "react-dom/server";
 import type { IconType } from "react-icons";
 import ShikiHighlighter from "react-shiki";
-import ReactDOMServer from "react-dom/server";
-import { TbCopy, TbCopyCheck } from "react-icons/tb";
 import CopyCodeButton from "./CopyCodeButton";
 import StackBlitzButton from "./StackBlitzButton";
-import { decode } from "html-entities";
 
 interface TabContextType {
   activeLabel: string;

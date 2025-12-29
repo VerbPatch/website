@@ -1,6 +1,8 @@
 import type { docsApiItems, docsApiLayoutItems, Menu } from "@/Interface/doc";
-import type { RouteLoaderParams } from "@/Interface/route-loader-params";
+import type { ExampleItem, } from "@/Interface/example";
+import type { ExampleRLParams, RouteLoaderParams } from "@/Interface/route-loader-params";
 import { apiMarkdownFile, docMarkdownFile, docApiNavigationJson } from "@/lib/doc";
+import { exampleData, } from "@/lib/example";
 import matter from "gray-matter";
 
 
@@ -46,4 +48,18 @@ export const docsApiLayoutLoader = async ({ params }: RouteLoaderParams): Promis
         path: path,
         menu: nav,
     } as docsApiLayoutItems;
+}
+
+export const exampleLoader = async ({ params, file }: ExampleRLParams,): Promise<ExampleItem> => {
+    const library: string = params["library"] || "N/A";
+    let path = params["*"] ?? "";
+
+    const { nav, fileData } = await exampleData(library, path, file);
+
+    return {
+        library,
+        path: path,
+        nav,
+        fileData
+    } as ExampleItem;
 }

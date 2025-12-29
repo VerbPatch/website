@@ -1,13 +1,15 @@
 import fs from 'node:fs/promises';
 
 const env = import.meta.env;
-// const env = {
-//     PROD: true,
-//     VITE_SOURCE_ROOT_PATH: "C:\\Users\\ramee\\Projects\\verbpatch\\"
-// }
-const gitHubUrl = 'https://raw.githubusercontent.com/VerbPatch';
+
+
+const gitDownloadUrl = 'https://raw.githubusercontent.com/VerbPatch';
 const localPath = env.VITE_SOURCE_ROOT_PATH;
 
+export const headers = {
+    Accept: "application/vnd.github+json",
+    Authorization: "Bearer " + env.VITE_GITHUB_PAT
+}
 
 const joinPath = (...segments: string[]): string => {
     return segments
@@ -18,9 +20,9 @@ const joinPath = (...segments: string[]): string => {
 };
 
 const buildPath = (isProduction: boolean, pathSegments: string[]): string =>
-    joinPath(isProduction ? gitHubUrl : localPath, ...pathSegments);
+    joinPath(isProduction ? gitDownloadUrl : localPath, ...pathSegments);
 
-const readFile = async (isProduction: boolean, pathSegments: string[]): Promise<string> => {
+export const readFile = async (isProduction: boolean, pathSegments: string[]): Promise<string> => {
     const filePath = buildPath(isProduction, pathSegments);
 
     if (isProduction) {
@@ -47,7 +49,9 @@ const readJsonFile = async <T = any>(isProduction: boolean, pathSegments: string
 
     if (isProduction) {
         try {
-            const response = await fetch(filePath);
+            const response = await fetch(filePath, {
+                headers: headers
+            });
             return response.ok ? await response.json() : [] as T;
         } catch (err) {
             console.error('Error fetching remote JSON:', err);

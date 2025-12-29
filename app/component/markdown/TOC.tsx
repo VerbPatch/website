@@ -4,7 +4,7 @@ import { NavLink } from "react-router";
 
 export function TOC({ headings }: { headings: TocProps[] }) {
   const renderHeadings = (items: typeof headings, root: boolean = true): ReactElement | null => {
-    if (!items.length) return null;
+    if (!items?.length) return null;
 
     return (
       <ul className={root ? "h-dvh" : "menu w-full"}>

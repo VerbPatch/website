@@ -1,3 +1,5 @@
+import type { TreeNode } from "./example";
+
 export interface AnchorProps extends React.AnchorHTMLAttributes<HTMLAnchorElement> {
     href?: string;
     children?: React.ReactNode;
@@ -51,9 +53,7 @@ export interface TocProps {
     level: number
 }
 
-export interface docsApiItems extends docMarkdown {
-    title: string;
-    description: string;
+export interface docsApiItems extends docMarkdown, SEO {
 }
 
 export interface docsApiLayoutItems extends docsBase {
@@ -71,4 +71,9 @@ export interface MenuItem {
     kind: number;
     path: string;
     isDeprecated: boolean;
+}
+
+export interface SEO {
+    title: string;
+    description: string;
 }
