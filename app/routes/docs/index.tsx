@@ -4,6 +4,7 @@ import type { RouteLoaderParams } from "@/Interface/route-loader-params";
 import { mdxCompiledFile } from "@/lib/mdxUtil";
 import { docsApiLoader } from "@/loader/docs.loader";
 import { useLoaderData } from "react-router";
+import type { Route } from "./+types";
 
 export async function loader(loadArgs: RouteLoaderParams) {
   const isAPI = loadArgs.params["*"]?.startsWith("api/");
@@ -15,15 +16,12 @@ export async function loader(loadArgs: RouteLoaderParams) {
   return response;
 }
 
-export default function Index() {
-  const { library, path, toc, title, description, mdxComponent } = useLoaderData<docsApiItems>();
+export function meta({ loaderData }: Route.MetaArgs) {
+  return [{ title: loaderData.title }, { name: "og:title", content: loaderData.title }, { name: "description", content: loaderData.description }];
+}
 
-  return (
-    <>
-      <title>{title}</title>
-      <meta property="og:title" content={title} />
-      <meta name="description" content={description} />
-      <MarkdownRenderer path={path} library={library} toc={toc} mdxComponent={mdxComponent} title={title} />
-    </>
-  );
+export default function Index() {
+  const { library, path, toc, title, mdxComponent } = useLoaderData<docsApiItems>();
+
+  return <MarkdownRenderer path={path} library={library} toc={toc} mdxComponent={mdxComponent} title={title} />;
 }

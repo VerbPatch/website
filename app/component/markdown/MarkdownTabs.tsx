@@ -1,6 +1,6 @@
 import { getExampleFile } from "@/lib/doc";
 import { decode } from "html-entities";
-import React, { Children, createContext, isValidElement, type ReactElement, type ReactNode, useContext, useEffect, useMemo, useState } from "react";
+import { Children, createContext, isValidElement, type ReactElement, type ReactNode, useContext, useEffect, useMemo, useState } from "react";
 import ReactDOMServer from "react-dom/server";
 import type { IconType } from "react-icons";
 import ShikiHighlighter from "react-shiki";
@@ -93,7 +93,6 @@ export function MarkdownTabs({ children, library }: TabsProps) {
     const { children } = codeChild.props as React.HTMLAttributes<HTMLElement>;
 
     const rendered = ReactDOMServer.renderToString(children);
-    console.log({ rendered: decode(rendered) });
     return decode(rendered);
   };
 
@@ -103,7 +102,6 @@ export function MarkdownTabs({ children, library }: TabsProps) {
     if (examplePath && sourcePath) {
       const remoteUrl = examplePath + "/" + sourcePath;
       const src = await getExampleFile(library, remoteUrl);
-      console.log(src);
       setActiveTabContent(src);
       setActiveLanguage(getLanguageFromUrl(remoteUrl));
       setExampleUrl(examplePath);

@@ -1,7 +1,8 @@
 import StackBlitzButton from "@/component/markdown/StackBlitzButton";
 import type { TreeNode } from "@/Interface/example";
-import { FaFile, FaFolder } from "react-icons/fa6";
+import { FaChevronLeft, FaChevronRight, FaCodeBranch, FaFile, FaFolder } from "react-icons/fa6";
 import { GoDotFill } from "react-icons/go";
+import { PiFileJsx } from "react-icons/pi";
 import { SiAngular, SiHtml5, SiJavascript, SiReact, SiSvelte, SiTypescript, SiVite, SiVuedotjs } from "react-icons/si";
 import { VscJson } from "react-icons/vsc";
 import { NavLink } from "react-router";
@@ -28,6 +29,8 @@ function FilTreeIcon({ fileName }: { fileName: string }) {
       return <SiReact />;
     case "ts":
       return <SiTypescript />;
+    case "jsx":
+      return <PiFileJsx />;
     case "js":
       return <SiJavascript />;
     case "json":
@@ -60,7 +63,7 @@ function FileTree({ nav, root, library, path, parent }: { nav: TreeNode[]; root?
                   {item.children && <FileTree nav={item.children} library={library} path={path} parent={(parent ? parent + "/" : "") + item.name} />}
                 </details>
               ) : (
-                <NavLink to={`/${library}/examples/${path}?file=${parent ? parent + "/" : ""}${item.name}`}>
+                <NavLink to={`/${library}/examples/${path}?file=${parent ? encodeURIComponent(parent) + "/" : ""}${encodeURIComponent(item.name)}`}>
                   <FileTreeIconName fileName={item.name} /> {item.name}
                 </NavLink>
               )}
@@ -72,7 +75,6 @@ function FileTree({ nav, root, library, path, parent }: { nav: TreeNode[]; root?
 }
 
 interface FileManagerProps {
-  title: string;
   library: string;
   path: string;
   nav: TreeNode[];
@@ -80,21 +82,34 @@ interface FileManagerProps {
   fileName: string;
 }
 
-export default function FileManager({ title, library, path, nav, fileData, fileName }: FileManagerProps) {
+export default function FileManager({ library, path, nav, fileData, fileName }: FileManagerProps) {
   const ext = fileName.substring(fileName.lastIndexOf(".") + 1);
+  const filePath = "https://github.com/VerbPatch/" + "headless-" + library + "/tree/main" + "/examples/" + path + "/" + fileName;
+
   return (
     <div className="flex flex-col w-full m-4">
       <div className="h-16 bg-base-100 border border-base-300 flex justify-between items-center-safe px-3 sticky top-0 z-9 rounded-t-xl">
-        <div className="flex gap-1">
+        <div className="flex-none w-48 flex gap-1 justify-between items-center-safe ">
           <GoDotFill size={24} color="var(--color-base-300)" />
           <GoDotFill size={24} color="var(--color-base-300)" />
           <GoDotFill size={24} color="var(--color-base-300)" />
+          <div className="divider divider-horizontal m-0"></div>
+          <button onClick={() => history.back()} className={"hover:bg-base-300 p-2 rounded-xl cursor-pointer"}>
+            <FaChevronLeft />
+          </button>
+          <button onClick={() => history.forward()} className={"hover:bg-base-300 p-2 rounded-xl cursor-pointer"}>
+            <FaChevronRight />
+          </button>
         </div>
-        <div>
-          <h1 className="text-xl">{title}</h1>
+        <div className="flex-1 min-w-0">
+          <h4 className="border border-base-300 p-2 rounded-xl flex items-center-safe mx-2 ">
+            <FaCodeBranch />
+            <div className="divider divider-horizontal m-0"></div>
+            <span className="truncate block">{filePath}</span>
+          </h4>
         </div>
-        <div>
-          <StackBlitzButton lib={library} path={path} file={"package.json"} />
+        <div className="flex-none w-40">
+          <StackBlitzButton lib={library} path={path} file={fileName} />
         </div>
       </div>
       <div className="grow grid grid-cols-12 border-l border-b border-r border-base-300 rounded-b-xl">

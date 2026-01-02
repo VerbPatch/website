@@ -9,7 +9,7 @@ import { getMdxComponents } from "@/lib/mdxUtil";
 import { NextPrevNavigation } from "./NextPrevNavigation";
 
 export default function MarkdownRenderer({ path, library, toc, mdxComponent, title }: MarkdownRendererProps) {
-  const isAPI = () => path.startsWith("api/");
+  const isAPI = () => path?.startsWith("api/") || false;
 
   const [ClientComponent, setClientComponent] = useState<MDXContent | null>(null);
 
@@ -34,15 +34,10 @@ export default function MarkdownRenderer({ path, library, toc, mdxComponent, tit
       <article className="w-full col-span-6 lg:col-span-5 h-full pb-4 px-4">
         <div className="shadow-xl rounded prose prose-sm md:prose-base w-full pb-4 pt-0">
           <NextPrevNavigation path={path} library={library} isAPI={isAPI()} title={title} />
-          <label htmlFor="api-drawer-sidebar" className="btn drawer-button lg:hidden absolute z-99 right-0">
-            <FaListAlt />
-          </label>
           {ClientComponent && <ClientComponent components={getMdxComponents(isAPI())} />}
         </div>
       </article>
-      <div className="sticky top-0 overflow-y-auto h-dvh w-full hidden lg:block">
-        <TOC headings={toc} />
-      </div>
+      <div className="sticky top-0 overflow-y-auto h-dvh w-full hidden lg:block">{toc && <TOC headings={toc} />}</div>
     </div>
   );
 }

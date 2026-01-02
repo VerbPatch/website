@@ -4,6 +4,7 @@ export type TreeNode = {
     name: string
     path: string
     url: string
+    htmlUrl: string
     download_url: string
     type: "file" | "dir"
     children?: TreeNode[],

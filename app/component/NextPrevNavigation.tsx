@@ -5,7 +5,7 @@ import { NavLink, useRouteLoaderData } from "react-router";
 
 interface NPNavprops {
   library: string;
-  path: string;
+  path?: string;
   isAPI: boolean;
   title: string;
 }
@@ -39,19 +39,27 @@ export function NextPrevNavigation({ library, path, isAPI, title }: NPNavprops) 
       {navigation && (
         <div className="sticky top-0 bg-base-100 z-9 flex text-sm shadow-xl w-full">
           {navigation.prev ? (
-            <NavLink to={navigation.prev.link} className="np group flex align-center gap-2 items-center-safe px-4 hover:bg-base-300 relative text-base-content">
-              <FaChevronLeft size={28} />
-              <div className="text-2xl hidden lg:group-hover:block overflow-hidden whitespace-nowrap">{navigation.prev.title}</div>
-            </NavLink>
+            <div className="tooltip tooltip-right flex lign-center gap-2 items-center-safe px-4 hover:bg-base-300">
+              <div className="tooltip-content bg-base-300 text-base-content py-5 rounded-none -translate-x-4 z-10 text-2xl">
+                <div>{navigation.prev.title}</div>
+              </div>
+              <NavLink to={navigation.prev.link} role="button" className="np">
+                <FaChevronLeft size={28} />
+              </NavLink>
+            </div>
           ) : (
             <span />
           )}
-          <h1 className="col-span-10 flex content-center items-center-safe">{title}</h1>
+          <h1 className="col-span-10 flex items-center-safe">{title}</h1>
           {navigation.next ? (
-            <NavLink to={navigation.next.link} className="np group flex align-center gap-2 items-center-safe px-4 hover:bg-base-300 text-base-content">
-              <div className="text-2xl hidden lg:group-hover:block overflow-hidden whitespace-nowrap">{navigation.next.title}</div>
-              <FaChevronRight size={28} />
-            </NavLink>
+            <div className="tooltip tooltip-left flex lign-center gap-2 items-center-safe px-4 hover:bg-base-300">
+              <div className="tooltip-content bg-base-300 text-base-content py-5 rounded-none translate-x-4 z-10 text-2xl">
+                <div>{navigation.next.title}</div>
+              </div>
+              <NavLink to={navigation.next.link} role="button" className="np">
+                <FaChevronRight size={28} />
+              </NavLink>
+            </div>
           ) : (
             <span />
           )}

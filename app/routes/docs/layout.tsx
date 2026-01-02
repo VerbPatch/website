@@ -3,7 +3,7 @@ import NavigationMenu from "@/component/NavigationMenu";
 import type { docsApiLayoutItems } from "@/Interface/doc";
 import type { RouteLoaderParams } from "@/Interface/route-loader-params";
 import { docsApiLayoutLoader } from "@/loader/docs.loader";
-import { FaCalendarAlt } from "react-icons/fa";
+import { FaListAlt } from "react-icons/fa";
 import { NavLink, Outlet, useLoaderData } from "react-router";
 
 export async function loader(loadArgs: RouteLoaderParams) {
@@ -18,19 +18,18 @@ export default function DocsLayout() {
       <input id="api-drawer-sidebar" type="checkbox" className="drawer-toggle" />
       <div className="drawer-content flex flex-col items-center justify-center relative">
         <TabProvider>
+          <label htmlFor="api-drawer-sidebar" className="btn drawer-button lg:hidden fixed z-10 left-2 bottom-8">
+            <FaListAlt />
+          </label>
           <Outlet />
         </TabProvider>
       </div>
       <div className="drawer-side dvh">
         <label htmlFor="api-drawer-sidebar" aria-label="close sidebar" className="drawer-overlay"></label>
-        <h1 className="w-full text-4xl flex justify-between my-4 pe-4 ps-6">
-          <NavLink to={"/"}>VerbPatch</NavLink>
+        <h1 className="w-full text-2xl flex justify-between my-4 pe-4 ps-6">
+          <NavLink to={`/${library}/docs/introduction`}>VerbPatch {library}</NavLink>
         </h1>
-        <h2 className="capitalize w-full text-2xl flex justify-between my-4 pe-4 ps-6">
-          {library}
-          {library.toLowerCase() === "calendar" && <FaCalendarAlt className="inline ms-2" />}
-        </h2>
-        <NavigationMenu menu={menu} path={markdown} />
+        <NavigationMenu menu={menu} path={markdown} library={library} />
       </div>
     </div>
   );

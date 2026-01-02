@@ -1,8 +1,6 @@
 import fs from 'node:fs/promises';
 
 const env = import.meta.env;
-
-
 const gitDownloadUrl = 'https://raw.githubusercontent.com/VerbPatch';
 const localPath = env.VITE_SOURCE_ROOT_PATH;
 
@@ -68,6 +66,7 @@ const readJsonFile = async <T = any>(isProduction: boolean, pathSegments: string
     }
 };
 
+//example file will always be from live environment in MarkdownTabs when clicked on tabs in client side
 export const getExampleFile = async (library: string, filePath: string) => {
     return readFile(true, [
         `headless-${library}`,
@@ -101,5 +100,13 @@ export const docMarkdownFile = async (library: string, docName: string) => {
         env.PROD ? 'refs/heads/main' : '',
         'docs',
         `${docName}.mdx`
+    ]);
+};
+
+export const changelogMarkdownFile = async (library: string) => {
+    return readFile(env.PROD, [
+        `headless-${library}`,
+        env.PROD ? 'refs/heads/main' : '',
+        `CHANGELOG.md`
     ]);
 };

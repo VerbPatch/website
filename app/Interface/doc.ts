@@ -29,9 +29,9 @@ export interface BottomNavProps {
 
 export interface MarkdownRendererProps {
     title: string;
-    path: string;
+    path?: string;
     library: string;
-    toc: TocProps[];
+    toc?: TocProps[];
     mdxComponent: any;
 }
 

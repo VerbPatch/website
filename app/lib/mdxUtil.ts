@@ -7,7 +7,7 @@ import type { PluggableList } from "unified";
 import rehypeExtractHeadings from "./rehypeExtractHeadings";
 import type { MDXComponents } from "mdx/types";
 import MarkdownTabs, { Tab } from "@/component/markdown/MarkdownTabs";
-import { SiReact, SiSvelte, SiVuedotjs } from "react-icons/si";
+import { SiReact, SiSvelte, SiVuedotjs, SiAngular, SiJquery, SiLit, SiPreact, SiQwik, SiSolid, SiJavascript } from 'react-icons/si';
 import A from "@/component/markdown/A";
 import { H1, H4, H5, H6 } from "@/component/markdown/H";
 import P from "@/component/markdown/P";
@@ -47,6 +47,13 @@ export const getMdxComponents = (includeCode: boolean) => {
         SiReact: SiReact,
         SiVuedotjs: SiVuedotjs,
         SiSvelte: SiSvelte,
+        SiAngular: SiAngular,
+        SiJquery: SiJquery,
+        SiLit: SiLit,
+        SiPreact: SiPreact,
+        SiQwik: SiQwik,
+        SiSolid: SiSolid,
+        SiJavascript: SiJavascript,
         a: A,
         h1: H1,
         h4: H4,

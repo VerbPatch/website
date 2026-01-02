@@ -1,6 +1,7 @@
 import { readdir } from "node:fs/promises";
 import { headers, readFile } from "./doc";
 import type { TreeNode } from "@/Interface/example";
+
 const env = import.meta.env;
 const gitApiURL = 'https://api.github.com/repos/VerbPatch';
 const localPath = env.VITE_SOURCE_ROOT_PATH;
@@ -10,6 +11,7 @@ interface GitContentNode {
     name: string;
     path: string;
     type: string;
+    html_url: string;
     url: string;
     download_url: string;
 }
@@ -22,13 +24,13 @@ const recursiveTree = async (isProd: boolean, gitFolderpath: string): Promise<Gi
         return (response.ok ? response.json() : []) as GitContentNode[];
     }
     else {
-        console.log({ gitFolderpath })
         var files = await readdir(gitFolderpath, { withFileTypes: true });
 
         const response = files.filter(f => skipDir.indexOf(f.name) === -1).map((item) => {
             return {
                 name: item.name,
                 download_url: !item.isDirectory() ? item.parentPath + '\\' + item.name : '',
+                html_url: !item.isDirectory() ? item.parentPath + '\\' + item.name : '',
                 path: item.parentPath + '\\' + item.name,
                 type: item.isDirectory() ? 'dir' : 'file',
                 url: item.parentPath + '\\' + item.name
@@ -49,6 +51,7 @@ async function buildTree(isProd: boolean, gitFolderpath: string) {
             name: item.name,
             path: item.path,
             url: item.url,
+            htmlUrl: item.html_url,
             download_url: item.type === 'file' ? item.download_url : "",
             type: item.type === "dir" ? 'dir' : 'file',
         } as TreeNode;
@@ -62,18 +65,6 @@ async function buildTree(isProd: boolean, gitFolderpath: string) {
     return root;
 }
 
-
-export function buildBreadcrumbs(path: string) {
-    if (!path) return []
-
-    const parts = path.split("/")
-
-    return parts.map((part, i) => ({
-        name: part,
-        path: parts.slice(0, i + 1).join("/")
-    }))
-}
-
 export const exampleData = async (library: string, examplePath: string, file: string) => {
     var isProd = env.PROD;
     const gitFolderJson = isProd ?
@@ -84,6 +75,7 @@ export const exampleData = async (library: string, examplePath: string, file: st
     const sorted = data.sort((a, b) => a.type.charCodeAt(0) - b.type.charCodeAt(0));
     const fileData = await readFile(isProd, [
         `headless-${library}`,
+        isProd ? 'refs/heads/main' : '',
         'examples',
         `${examplePath.replace('/', '\\')}`,
         file]);
