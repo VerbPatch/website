@@ -10,11 +10,12 @@ export const headers = {
 }
 
 const joinPath = (...segments: string[]): string => {
-    return segments
+    const joined = segments
         .filter(Boolean)
         .join('/')
-        .replace(/\/+/g, '/')
         .replace(/\\/g, '/');
+
+    return joined.replace(/([^:]\/)\/+/g, '$1');
 };
 
 const buildPath = (isProduction: boolean, pathSegments: string[]): string =>
