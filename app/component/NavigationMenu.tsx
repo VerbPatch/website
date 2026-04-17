@@ -19,7 +19,7 @@ const InnerList = ({ appendGroup, title, open, children, group }: { appendGroup:
             <span>{title}</span>
           </summary>
           <ul className="">
-            {children.map(({ title, path }, iindex) => (
+            {children?.map(({ title, path }, iindex) => (
               <li key={`${iindex}`}>
                 <MenuLink
                   to={path}
@@ -46,8 +46,8 @@ export default function NavigationMenu({ menu, path, library }: { menu: Menu[]; 
       <li>
         <h3 className="menu-title text-xl divider divider-start">Docs</h3>
       </li>
-      {menu.map(({ title, children, group }, index) => {
-        const open = children.filter((child) => child.path.indexOf(path || "-1") > -1).length > 0;
+      {menu?.map(({ title, children, group }, index) => {
+        const open = children?.filter((child) => child.path?.indexOf(path || "-1") > -1).length > 0;
 
         let appendGroup = false;
         if (_group != group) {

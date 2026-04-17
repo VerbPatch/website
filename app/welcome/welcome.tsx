@@ -1,6 +1,6 @@
 import { CgFileDocument } from "react-icons/cg";
 import { FaChevronDown } from "react-icons/fa6";
-import { LuCalendarClock } from "react-icons/lu";
+import { LuCalendarClock, LuCloudUpload } from "react-icons/lu";
 import { SiGithub } from "react-icons/si";
 import { NavLink } from "react-router";
 
@@ -28,7 +28,7 @@ export function Welcome() {
           </div>
         </div>
       </div>
-      <div id="calendar-box" className="calendar-box h-dvh flex items-center justify-center">
+      <div id="calendar-box" className="calendar-box h-dvh flex items-center justify-center flex-col">
         <div className="border-2 border-base-300 rounded-xl h-78 w-100 relative p-8 flex flex-col justify-between">
           <div className="rotate-15 bg-base-100 absolute -top-5 -right-5">
             <LuCalendarClock size={78} color="var(--color-base-content)" className="animate-bounce" />
@@ -40,6 +40,27 @@ export function Welcome() {
               <CgFileDocument /> Docs
             </NavLink>
             <NavLink to={"https://github.com/VerbPatch/headless-calendar"} className={"btn btn-ghost"} target="_blank">
+              <SiGithub />
+              Source
+            </NavLink>
+          </div>
+        </div>
+        <div className="text-center mt-4 flex justify-center cursor-pointer" onClick={() => scrollToView("uploader-box")}>
+          <FaChevronDown size={32} className="animate-bounce" />
+        </div>
+      </div>
+      <div id="uploader-box" className="uploader-box h-dvh flex items-center justify-center">
+        <div className="border-2 border-base-300 rounded-xl h-78 w-100 relative p-8 flex flex-col justify-between">
+          <div className="rotate-15 bg-base-100 absolute -top-1 -right-5">
+            <LuCloudUpload size={78} color="var(--color-base-content)" className="animate-bounce" />
+          </div>
+          <h2 className="text-center text-4xl bold font-[Chewy]">Headless Uploader</h2>
+          <p>A powerful, flexible, and completely headless file uploader library. Built with TypeScript, zero dependencies, and designed to work with any UI framework or design system..</p>
+          <div className="text-center">
+            <NavLink to={"/Uploader/docs/introduction"} className={"btn btn-ghost"}>
+              <CgFileDocument /> Docs
+            </NavLink>
+            <NavLink to={"https://github.com/VerbPatch/headless-uploader"} className={"btn btn-ghost"} target="_blank">
               <SiGithub />
               Source
             </NavLink>

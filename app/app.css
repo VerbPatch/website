@@ -1,8 +1,8 @@
 @import url(https://fonts.googleapis.com/css2?family=Chewy&family=Knewave&display=swap);
 @import "tailwindcss";
-@plugin "daisyui"{
-   themes: light --default;
-};
+@plugin "daisyui" {
+  themes: light --default;
+}
 
 @plugin "daisyui/theme" {
   name: "winter";
@@ -75,7 +75,7 @@
 } */
 
 * {
-  scrollbar-color: var(--color-base-300) var(--color-base-100);  
+  scrollbar-color: var(--color-base-300) var(--color-base-100);
   scrollbar-gutter: stable;
   scrollbar-width: thin;
 }
@@ -88,7 +88,6 @@
 .hide-scrollbar::-webkit-scrollbar {
   display: none;
 }
-
 
 .drawer-side:hover::-webkit-scrollbar-thumb {
   background-color: var(--color-base-content);
@@ -112,19 +111,19 @@
   @apply scroll-mt-20 font-bold text-base-content;
 }
 
-.prose h1 { 
-  @apply text-4xl w-full sticky top-0 bg-base-100 z-9 px-5 py-4; 
+.prose h1 {
+  @apply text-4xl w-full sticky top-0 bg-base-100 z-9 px-5 py-4;
 }
-.prose h2 { 
-  @apply text-3xl mt-6 mb-3 pb-2; 
+.prose h2 {
+  @apply text-3xl mt-6 mb-3 pb-2;
 }
-.prose h3 { 
+.prose h3 {
   @apply text-2xl mt-5;
 }
-.prose h4 { 
+.prose h4 {
   @apply text-lg mt-4 mb-2;
 }
-.prose h5 { 
+.prose h5 {
   @apply mt-3 mb-1;
 }
 
@@ -143,10 +142,18 @@
 
 /* --- Lists --- */
 .prose ul,
-.prose ol { @apply my-4 pl-6 space-y-1; }
-.prose ul { @apply list-disc; }
-.prose ol { @apply list-decimal; }
-.prose li { @apply leading-7; }
+.prose ol {
+  @apply my-4 pl-6 space-y-1;
+}
+.prose ul {
+  @apply list-disc;
+}
+.prose ol {
+  @apply list-decimal;
+}
+.prose li {
+  @apply leading-7;
+}
 
 .prose > ul,
 .prose > ol {
@@ -165,7 +172,7 @@
 
 /* --- Tables --- */
 .prose table {
-  @apply table table-zebra w-full text-base;
+  @apply table w-full text-base;
 }
 .prose th {
   @apply font-semibold bg-base-200;
@@ -208,7 +215,8 @@
 .prose > h5,
 .prose > h6,
 .prose > p,
-.prose > span.source {
+.prose > span.source,
+.prose > table {
   position: relative;
   padding-left: 28px;
   padding-right: 28px;
@@ -229,8 +237,7 @@ h6 .heading-link {
   display: none;
   position: absolute;
   margin-left: -20px;
-  color:var(--color-base-content)
-  
+  color: var(--color-base-content);
 }
 
 h1:hover .heading-link,
@@ -240,12 +247,12 @@ h4:hover .heading-link,
 h5:hover .heading-link,
 h6:hover .heading-link {
   display: inline;
-  text-decoration:none;
+  text-decoration: none;
 }
 
 /* --- Table of Contents Styling --- */
 .menu {
-  @apply bg-base-200 rounded-lg p-4;
+  @apply bg-base-200 rounded-lg;
 }
 
 .menu li {
@@ -263,4 +270,3 @@ h6:hover .heading-link {
 .menu ul li > a {
   @apply text-sm;
 }
-

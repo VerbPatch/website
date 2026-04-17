@@ -12,6 +12,7 @@ import A from "@/component/markdown/A";
 import { H1, H4, H5, H6 } from "@/component/markdown/H";
 import P from "@/component/markdown/P";
 import Code, { CodeBlock } from "@/component/markdown/Code";
+import { Table } from "@/component/markdown/Table";
 
 export const mdxCompiledFile = async (doc: string) => {
     const plugins: PluggableList = [
@@ -54,6 +55,7 @@ export const getMdxComponents = (includeCode: boolean) => {
         SiQwik: SiQwik,
         SiSolid: SiSolid,
         SiJavascript: SiJavascript,
+        Table: Table,
         a: A,
         h1: H1,
         h4: H4,
