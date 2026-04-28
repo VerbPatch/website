@@ -1,6 +1,7 @@
 import { readdir } from "node:fs/promises";
-import { headers, readFile } from "./doc";
+import { headers, readFile } from "./doc.server";
 import type { TreeNode } from "@/Interface/example";
+import { githubCache } from "./cache.server";
 
 const env = import.meta.env;
 const gitApiURL = 'https://api.github.com/repos/VerbPatch';
@@ -18,10 +19,17 @@ interface GitContentNode {
 
 const recursiveTree = async (isProd: boolean, gitFolderpath: string): Promise<GitContentNode[]> => {
     if (isProd) {
+        const cached = githubCache.get(gitFolderpath);
+        if (cached) return cached;
+
         const response = await fetch(gitFolderpath, {
             headers: headers
         });
-        return (response.ok ? response.json() : []) as GitContentNode[];
+        const json = (response.ok ? await response.json() : []) as GitContentNode[];
+        if (response.ok) {
+            githubCache.set(gitFolderpath, json);
+        }
+        return json;
     }
     else {
         var files = await readdir(gitFolderpath, { withFileTypes: true });

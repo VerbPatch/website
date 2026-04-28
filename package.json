@@ -18,6 +18,8 @@
     "gray-matter": "^4.0.3",
     "hast-util-from-html-isomorphic": "^2.0.0",
     "html-entities": "^2.6.0",
+    "isbot": "^5",
+    "lru-cache": "^11.3.5",
     "react": "^19.2.3",
     "react-dom": "^19.2.3",
     "react-icons": "^5.5.0",
@@ -26,8 +28,7 @@
     "rehype-autolink-headings": "^7.1.0",
     "rehype-slug": "^6.0.0",
     "remark-frontmatter": "^5.0.0",
-    "unified": "^11.0.5",
-    "isbot": "^5"
+    "unified": "^11.0.5"
   },
   "devDependencies": {
     "@react-router/dev": "^7.11.0",

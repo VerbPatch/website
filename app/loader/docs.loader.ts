@@ -1,7 +1,7 @@
 import type { docsApiItems, docsApiLayoutItems, Menu } from "@/Interface/doc";
 import type { ExampleItem, } from "@/Interface/example";
 import type { ExampleRLParams, RouteLoaderParams } from "@/Interface/route-loader-params";
-import { apiMarkdownFile, docMarkdownFile, docApiNavigationJson, changelogMarkdownFile } from "@/lib/doc";
+import { apiMarkdownFile, docMarkdownFile, docApiNavigationJson, changelogMarkdownFile } from "@/lib/doc.server";
 import { exampleData, } from "@/lib/example";
 import matter from "gray-matter";
 
